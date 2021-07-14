@@ -1,0 +1,10 @@
+# Services
+Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig, /usr/bin/systemctl start, /usr/bin/systemctl stop, /usr/bin/systemctl reload, /usr/bin/systemctl restart, /usr/bin/systemctl status, /usr/bin/systemctl enable, /usr/bin/systemctl disable
+# Installation and management of software
+Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+# All the shutdown commands
+Cmnd_Alias SHUTDOWN = /sbin/poweroff, /sbin/reboot, /sbin/halt
+# Admin commands
+Cmnd_Alias ADMINCOMMANDS = /usr/sbin/passwd, /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /usr/sbin/visudo
+
+%admins ALL=(ALL) NOPASSWD: SERVICES, SOFTWARE, SHUTDOWN, ADMINCOMMANDS

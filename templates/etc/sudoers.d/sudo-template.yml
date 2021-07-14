@@ -1,0 +1,57 @@
+- name: Adding sudo users to hosts
+  hosts: all
+  vars:
+    adminusers:
+      - admin1
+      - admin2
+    powerusers:
+      - user1
+      - user2
+   
+  tasks:
+    - name: Create sudoers file backup
+      command: cp -f /etc/sudoers /etc/sudoers.bak
+
+    - name: Check includedir in sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        line: "#includedir /etc/sudoers.d"
+        state: present
+        validate: "visudo -cf %s"
+
+    - name: Add sudoers users to wheel group
+      user:
+        name: "{{ item }}"
+        groups: wheel
+        append: yes
+      with_items: "{{ sudoers }}"
+
+    - name: Make sure a 'admins' group present
+      group:
+        name: admins
+        state: present
+
+    - name: Add custom admins group sudo rules
+      copy: 
+        src: files/etc/sudoers.d/admingroup
+        dest: /etc/sudoers.d/admingroup
+        owner: root
+        group: root
+        mode: 0440
+        validate: "visudo -cf %s"
+
+    - name: Add sudoers using template
+      template:
+        src: templates/etc/sudoers.d/powerusers-template.j2
+        dest: /etc/sudoers.d/powerusers
+        owner: root
+        group: root
+        mode: 0440
+        validate: "visudo -cf %s"
+
+        
+
+
+
+
+
