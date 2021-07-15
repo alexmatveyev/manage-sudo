@@ -1,0 +1,5 @@
+---
+# defaults file for sudo-group-role
+sudoersd_dir: /etc/sudoers.d/
+sudoers_files_dir: files/etc/sudoers.d
+sudoers_conf_file: /etc/sudoers

@@ -2,6 +2,7 @@
   hosts: all
   gather_facts: no
   vars:
+    sudodeftemplate: defaultsudo
     sudoers:
       - user1
       - user2
@@ -29,19 +30,10 @@
         name: admins
         state: present
 
-    - name: Add custom sudo groups
-      copy: 
-        src: files/etc/sudoers.d/groups
-        dest: /etc/sudoers.d/groups
-        owner: root
-        group: root
-        mode: 0440
-        validate: "visudo -cf %s"
-
     - name: Add custom admins group sudo rules
       copy: 
-        src: files/etc/sudoers.d/admingroup
-        dest: /etc/sudoers.d/admingroup
+        src: files/etc/sudoers.d/10-admingroup
+        dest: /etc/sudoers.d/10-admingroup
         owner: root
         group: root
         mode: 0440
@@ -49,8 +41,8 @@
 
     - name: Add custom powerusers group sudo rules
       copy: 
-        src: files/etc/sudoers.d/powerusersgroup
-        dest: /etc/sudoers.d/powerusersgroup
+        src: files/etc/sudoers.d/20-powerusersgroup
+        dest: /etc/sudoers.d/20-powerusersgroup
         owner: root
         group: root
         mode: 0440

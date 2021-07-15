@@ -1,0 +1,23 @@
+---
+# tasks file for sudo-group-role
+  - name: Create sudoers file backup
+    command: cp -f /etc/sudoers /etc/sudoers.bak
+
+  - name: Check includedir in sudoers is enabled
+    lineinfile:
+      dest: "{{ sudoers_conf_file }}"
+      line: "#includedir /etc/sudoers.d"
+      state: present
+      validate: "visudo -cf %s"
+
+  - name: Remove all existing sudo rules
+    shell: /usr/bin/rm -rf /etc/sudoers.d/*
+
+  - name: Add custom group sudo rules
+    copy: 
+      src: "{{ sudoers_files_dir }}/{{ sudo_group }}"
+      dest: "{{ sudoersd_dir }}/{{ sudo_group }}"
+      owner: root
+      group: root
+      mode: 0440
+      validate: "visudo -cf %s"

@@ -1,0 +1,8 @@
+User_Alias      GROUPONE = user1, user2
+User_Alias      GROUPTWO = poweruser1, poweruser2
+
+# Installation and management of software
+Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+
+GROUPONE ALL=(ALL) NOPASSWD: SOFTWARE
+GROUPTWO ALL=(ALL) NOPASSWD: SOFTWARE
