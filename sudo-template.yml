@@ -31,8 +31,8 @@
 
     - name: Add custom sudo groups
       copy: 
-        src: files/etc/sudoers.d/sudogroups
-        dest: /etc/sudoers.d/sudogroups
+        src: files/etc/groups
+        dest: /etc/sudoers.d/groups
         owner: root
         group: root
         mode: 0440
