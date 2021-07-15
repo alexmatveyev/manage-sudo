@@ -31,7 +31,7 @@
 
     - name: Add custom sudo groups
       copy: 
-        src: files/etc/groups
+        src: files/etc/sudoers.d/groups
         dest: /etc/sudoers.d/groups
         owner: root
         group: root
@@ -49,8 +49,8 @@
 
     - name: Add custom powerusers group sudo rules
       copy: 
-        src: files/etc/sudoers.d/powerusers
-        dest: /etc/sudoers.d/powerusers
+        src: files/etc/sudoers.d/powerusersgroup
+        dest: /etc/sudoers.d/powerusersgroup
         owner: root
         group: root
         mode: 0440
