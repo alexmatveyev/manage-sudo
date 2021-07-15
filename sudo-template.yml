@@ -1,5 +1,6 @@
-- name: Adding sudo users to hosts
+- name: Adding sudo groups to hosts
   hosts: all
+  gather_facts: no
   vars:
     adminusers:
       - admin1
@@ -19,12 +20,12 @@
         state: present
         validate: "visudo -cf %s"
 
-    - name: Add sudoers users to wheel group
-      user:
-        name: "{{ item }}"
-        groups: wheel
-        append: yes
-      with_items: "{{ sudoers }}"
+#    - name: Add sudoers users to wheel group
+#      user:
+#        name: "{{ item }}"
+#        groups: wheel
+#        append: yes
+#      with_items: "{{ sudoers }}"
 
     - name: Make sure a 'admins' group present
       group:
@@ -48,10 +49,3 @@
         group: root
         mode: 0440
         validate: "visudo -cf %s"
-
-        
-
-
-
-
-
