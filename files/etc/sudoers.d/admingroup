@@ -8,3 +8,4 @@ Cmnd_Alias SHUTDOWN = /sbin/poweroff, /sbin/reboot, /sbin/halt
 Cmnd_Alias ADMINCOMMANDS = /usr/sbin/passwd, /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /usr/sbin/visudo
 
 %admins ALL=(ALL) NOPASSWD: SERVICES, SOFTWARE, SHUTDOWN, ADMINCOMMANDS
+GROUPONE ALL=(ALL) NOPASSWD: SERVICES, SOFTWARE, SHUTDOWN, ADMINCOMMANDS

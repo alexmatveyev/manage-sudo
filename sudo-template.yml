@@ -2,10 +2,7 @@
   hosts: all
   gather_facts: no
   vars:
-    adminusers:
-      - admin1
-      - admin2
-    powerusers:
+    sudoers:
       - user1
       - user2
    
@@ -32,6 +29,15 @@
         name: admins
         state: present
 
+    - name: Add custom sudo groups
+      copy: 
+        src: files/etc/sudoers.d/sudogroups
+        dest: /etc/sudoers.d/sudogroups
+        owner: root
+        group: root
+        mode: 0440
+        validate: "visudo -cf %s"
+
     - name: Add custom admins group sudo rules
       copy: 
         src: files/etc/sudoers.d/admingroup
@@ -41,9 +47,9 @@
         mode: 0440
         validate: "visudo -cf %s"
 
-    - name: Add sudoers using template
-      template:
-        src: templates/etc/sudoers.d/powerusers-template.j2
+    - name: Add custom powerusers group sudo rules
+      copy: 
+        src: files/etc/sudoers.d/powerusers
         dest: /etc/sudoers.d/powerusers
         owner: root
         group: root
