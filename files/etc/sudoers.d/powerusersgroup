@@ -1,3 +1,5 @@
+User_Alias      GROUPTWO = poweruser1, poweruser2
+
 ## Networking
 Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
 
