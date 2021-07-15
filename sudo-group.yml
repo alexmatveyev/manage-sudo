@@ -1,10 +1,11 @@
 ---
-- name: Create nextdns container
+- name: Create sudo group
   hosts: all
+  gather_facts: no
   vars:
     sudo_group: default-sudo
 
   tasks:
-    - name: Create sudo groups
+    - name: Calling role to create sudo group
       include_role:
         name: sudo-group-role
